@@ -1,7 +1,29 @@
-import "./App.css";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, Route, Switch } from "react-router";
+import Header from "./components/Header";
+import Issues from "./components/Issues";
+import Main from "./components/Main";
+import Search from "./components/Search";
+import Spinner from "./shared/Spinner";
+import theme from "./styles/theme";
+import "./styles/App.css";
+import { Grid } from "@mui/material";
 
 function App() {
-  return <div className="App"></div>;
+  const isLoading = useSelector((state) => state.isLoading.isLoading);
+
+  return (
+    <Grid className="App" width={theme.size.mainWidth} margin="0 auto 0 auto">
+      <Header />
+      <Switch>
+        <Route exact path="/" component={Main} />
+        <Route exact path="/search/repository/:word" component={Search} />
+        <Route exact path="/search/issues" component={Issues} />
+        <Redirect from="*" to="/" />
+      </Switch>
+      {isLoading && <Spinner />}
+    </Grid>
+  );
 }
 
 export default App;

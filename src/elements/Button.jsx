@@ -6,51 +6,49 @@ import theme from "../styles/theme";
 // is_flex : {direction, just_con,align_item}
 // 이외 설정은 css string 값을 기입할것
 
-const Grid = (props) => {
-  const { children, _onClick, ...rest } = props;
+const Button = (props) => {
+  const { _onClick, children, ...rest } = props;
 
   return (
-    <Wrapper onClick={_onClick} {...rest}>
+    <ButtonEle {...rest} onClick={_onClick}>
       {children}
-    </Wrapper>
+    </ButtonEle>
   );
 };
 
-Grid.defaultProps = {
-  width: "100%",
-  height: "100%",
+Button.defaultProps = {
   children: null,
+  bg: theme.color.grayBlack1,
+  width: "100%",
+  color: `${theme.color.gray}`,
+  margin: "auto",
+  height: "100%",
   _onClick: () => {},
-  is_flex: null,
-  cursor: false,
-  margin: "",
-  padding: "",
-  bg: theme.color.white,
-  color: theme.color.black,
-  hover: false,
-  hover_color: theme.color.black,
-  hover_bg: theme.color.white,
-  border: "none",
+  type: "button",
+  hover_color: "white",
+  border_radius: "0px",
+  fontSize: "14px",
+  bold: false,
+  isFlex: null,
 };
 
-const Wrapper = styled.div`
-  border: ${(props) => props.border};
+const ButtonEle = styled.button`
+  border: none;
+  font-size: ${(props) => props.fontSize};
+  font-weight: ${(props) => props.bold && 700};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
   background-color: ${(props) => props.bg};
+  border-radius: ${(props) => props.border_radius};
+  transition: background-color 0.3s;
+  :hover {
+    cursor: pointer;
+    background-color: ${(props) => props.hover_color};
+    color: ${(props) => props.bg};
+    border: 1px solid ${(props) => props.bg};
+  }
   color: ${(props) => props.color};
-  ${(props) =>
-    props.hover &&
-    `
-        :hover {
-            cursor: pointer;
-            color: ${props.hover_color};
-            background-color : ${props.hover_bg};
-        }
-
-    `}
-  ${(props) => props.cursor && "cursor : pointer"};
   ${(props) => {
     if (props.is_flex !== null) {
       return `
@@ -63,4 +61,4 @@ const Wrapper = styled.div`
   }}
 `;
 
-export default Grid;
+export default Button;
