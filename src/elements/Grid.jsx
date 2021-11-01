@@ -65,6 +65,7 @@ const Wrapper = styled.div`
             `;
     }
   }}
+  transition: background-color 0.3s;
 `;
 
 export default Grid;

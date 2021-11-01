@@ -15,6 +15,7 @@
     - 컴포넌트 관련
         - div 이용시 elements 폴더 Grid 숙지 후 재이용 할 것
         - button 이용시 elements 폴더 Button 숙지 후 재이용 할 것
+        - input 이용시 elements 폴더 Input 숙지 후 재이용 할 것
         - Header
             - url이 home일 경우 전체화면과 현재 저장된 repository 확인가능하게
             - 이외에는 navbar 역할

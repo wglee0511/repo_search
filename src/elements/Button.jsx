@@ -27,14 +27,15 @@ Button.defaultProps = {
   type: "button",
   hover_color: "white",
   border_radius: "0px",
-  fontSize: "14px",
+  font_size: "14px",
   bold: false,
-  isFlex: null,
+  is_flex: null,
+  hover: false,
 };
 
 const ButtonEle = styled.button`
   border: none;
-  font-size: ${(props) => props.fontSize};
+  font-size: ${(props) => props.font_size};
   font-weight: ${(props) => props.bold && 700};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -42,12 +43,16 @@ const ButtonEle = styled.button`
   background-color: ${(props) => props.bg};
   border-radius: ${(props) => props.border_radius};
   transition: background-color 0.3s;
-  :hover {
-    cursor: pointer;
-    background-color: ${(props) => props.hover_color};
-    color: ${(props) => props.bg};
-    border: 1px solid ${(props) => props.bg};
-  }
+  ${(props) =>
+    props.hover &&
+    `
+        :hover {
+            cursor: pointer;
+            color: ${props.hover_color};
+            background-color : ${props.hover_bg};
+        }
+
+    `}
   color: ${(props) => props.color};
   ${(props) => {
     if (props.is_flex !== null) {

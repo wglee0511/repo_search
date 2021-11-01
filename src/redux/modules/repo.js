@@ -22,8 +22,28 @@ export const getRepoFromGithub =
   (word) =>
   async (dispatch, getState, { history }) => {
     try {
+      const { next, total } = getState().repo.paging;
+      if (next > total && next !== 1) {
+        return;
+      }
+      dispatch(actionIsLoading());
+
+      const getData = await repoAxios.search(word, next);
+      const data = getData.data;
+      const totalItem = data.items;
+      const totalPage = data.total_count;
+      const totalSetup = totalItem.map((each) => {
+        return {
+          repository: each.full_name,
+          description: each.description,
+        };
+      });
+
+      console.log(data);
+
       dispatch(actionIsLoading());
     } catch (error) {
+      dispatch(actionIsLoading());
       testLogger(error);
     }
   };

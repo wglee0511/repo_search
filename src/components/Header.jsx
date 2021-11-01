@@ -5,16 +5,38 @@ import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import theme from "../styles/theme";
 import Logo from "./header/Logo";
+import Input from "../elements/Input";
+import StoredRepo from "./header/StoredRepo";
 
 const Header = () => {
   // true or false로 창크기 조절
   const [repos, setRepos] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
   const url = history.location.pathname;
+
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    history.push(`/search/repository/${inputValue}`);
+  };
+
+  const handleOnChange = (event) => {
+    const value = event.target.value;
+    setInputValue(value);
+  };
 
   return (
     <Wrapper>
-      <Grid margin="10px 0 0 15px " width={theme.size.mainWidth}>
+      <Grid margin="10px 0 10px 0" width={theme.size.mainWidth}>
         <Logo url={url} setRepos={setRepos} repos={repos} />
+        <form onSubmit={handleOnSubmit}>
+          <Input
+            margin="10px 0 10px"
+            value={inputValue}
+            _onChange={handleOnChange}
+          />
+        </form>
+        <StoredRepo repos={repos} setRepos={setRepos} />
       </Grid>
     </Wrapper>
   );
