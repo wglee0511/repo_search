@@ -7,7 +7,7 @@ import Search from "./components/Search";
 import Spinner from "./shared/Spinner";
 import theme from "./styles/theme";
 import "./styles/App.css";
-import { Grid } from "@mui/material";
+import Grid from "./elements/Grid";
 
 function App() {
   const isLoading = useSelector((state) => state.isLoading.isLoading);

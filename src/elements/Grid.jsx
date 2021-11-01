@@ -25,21 +25,25 @@ Grid.defaultProps = {
   cursor: false,
   margin: "",
   padding: "",
-  bg: theme.color.white,
-  color: theme.color.black,
+  bg: theme.color.bg,
+  bold: false,
+  color: theme.color.gray,
   hover: false,
   hover_color: theme.color.black,
   hover_bg: theme.color.white,
+  font_size: "17px",
   border: "none",
 };
 
 const Wrapper = styled.div`
+  ${(props) => props.bold && `font-weight : 700;`}
   border: ${(props) => props.border};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
   background-color: ${(props) => props.bg};
   color: ${(props) => props.color};
+  font-size: ${(props) => props.font_size};
   ${(props) =>
     props.hover &&
     `
