@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router";
 import Header from "./components/Header";
-import Issues from "./components/Issues";
-import Main from "./components/Main";
-import Search from "./components/Search";
+import Issues from "./pages/Issues";
+import Main from "./pages/Main";
+import Search from "./pages/Search";
 import { NotificationContainer } from "react-notifications";
 import Spinner from "./shared/Spinner";
 import theme from "./styles/theme";

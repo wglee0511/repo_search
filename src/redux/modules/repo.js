@@ -85,7 +85,7 @@ export const getRepoFromGithub = (word, page) => async (dispatch) => {
 };
 
 export const getIssuesFromGithub =
-  (word, page) =>
+  (page) =>
   async (dispatch, getState, { history }) => {
     try {
       dispatch(actionIsLoading());
@@ -94,11 +94,15 @@ export const getIssuesFromGithub =
       let queryWord = "";
       storedRepo.map((each) => (queryWord += `repo:${each.repository}+`));
 
+      if (queryWord === "") {
+        dispatch(actionGetIssue({ totalPage: 0, totalSetup: [] }));
+        dispatch(actionIsLoading());
+        return;
+      }
+
       const getData = await repoAxios.searchIssue(queryWord, page);
       const data = getData.data;
-
       const totalItem = data.items;
-      testLogger(totalItem);
       const totalPage = data.total_count;
       const totalSetup = totalItem.map((each) => {
         const repository = each.repository_url.slice(29);
@@ -110,7 +114,6 @@ export const getIssuesFromGithub =
           repository_url: `https://github.com/${repository}`,
         };
       });
-
       dispatch(actionGetIssue({ totalPage, totalSetup }));
       dispatch(actionIsLoading());
     } catch (error) {

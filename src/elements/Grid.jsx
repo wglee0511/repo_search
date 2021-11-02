@@ -37,6 +37,8 @@ Grid.defaultProps = {
 };
 
 const Wrapper = styled.div`
+  box-sizing: border-box;
+
   ${(props) => props.bold && `font-weight : 700;`}
   border: ${(props) => props.border};
   width: ${(props) => props.width};

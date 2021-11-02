@@ -4,8 +4,11 @@ import Button from "../elements/Button";
 import theme from "../styles/theme";
 import { NotificationManager } from "react-notifications";
 import { useDispatch, useSelector } from "react-redux";
-import { actionDeleteRepo, actionSetRepo } from "../redux/modules/repo";
-import NotificationContainer from "react-notifications/lib/NotificationContainer";
+import {
+  actionDeleteRepo,
+  actionSetRepo,
+  getIssuesFromGithub,
+} from "../redux/modules/repo";
 
 const Repo = (props) => {
   const { in_repo, repo_id, repository, description, language, html_url } =
@@ -24,18 +27,21 @@ const Repo = (props) => {
 
   const handleClickPlus = () => {
     if (storedRepo.length >= 4) {
-      NotificationManager.info("4개 이상 등록이 불가합니다.");
+      NotificationManager.warning(
+        "Repository는 4개 이상 등록이 불가합니다.",
+        "등록 개수 제한",
+        3000
+      );
       return;
     }
+    NotificationManager.success(`${storedRepo.length + 1} 개`, "등록 성공");
     dispatch(actionSetRepo(repoObj));
   };
 
   const handleClickDelete = () => {
-    if (storedRepo.length === 0) {
-      NotificationManager.info("등록된 Repository가 존재하지 않습니다.");
-      return;
-    }
+    NotificationManager.success("삭제 완료");
     dispatch(actionDeleteRepo(repoObj));
+    dispatch(getIssuesFromGithub(1));
   };
 
   return (
