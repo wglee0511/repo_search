@@ -13,7 +13,7 @@ import {
 const Repo = (props) => {
   const { in_repo, repo_id, repository, description, language, html_url } =
     props;
-
+  // in_repo가 true일때 검색으로 검색한 repository, false일때 저장한 repository
   const dispatch = useDispatch();
   const storedRepo = useSelector((state) => state.repo.localRepo);
 

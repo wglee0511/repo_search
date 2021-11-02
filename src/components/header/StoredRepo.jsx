@@ -11,6 +11,7 @@ const StoredRepo = (props) => {
   const { repos, setRepos } = props;
   const storedRepo = useSelector((state) => state.repo.localRepo);
 
+  //repos가 true일떄 저장해둔 것이 보이고 false일때는 닫음
   const hadleClickRepos = () => {
     setRepos((prev) => !prev);
   };

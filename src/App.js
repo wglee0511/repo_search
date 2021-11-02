@@ -17,6 +17,7 @@ function App() {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    // 새로고침시 로컬스토리지에 저장해둔 레포지토리를 리덕스에 다시 저장하는 코드
     dispatch(actionResetUpRepo());
   }, []);
 
