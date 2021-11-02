@@ -6,46 +6,43 @@ import theme from "../styles/theme";
 // is_flex : {direction, just_con,align_item}
 // 이외 설정은 css string 값을 기입할것
 
-const Grid = (props) => {
-  const { children, _onClick, ...rest } = props;
+const Button = (props) => {
+  const { _onClick, children, ...rest } = props;
 
   return (
-    <Wrapper onClick={_onClick} {...rest}>
+    <ButtonEle {...rest} onClick={_onClick}>
       {children}
-    </Wrapper>
+    </ButtonEle>
   );
 };
 
-Grid.defaultProps = {
-  width: "100%",
-  height: "100%",
+Button.defaultProps = {
   children: null,
+  bg: theme.color.grayBlack1,
+  width: "100%",
+  color: `${theme.color.gray}`,
+  margin: "auto",
+  height: "100%",
   _onClick: () => {},
-  is_flex: null,
-  cursor: false,
-  margin: "",
-  padding: "",
-  bg: theme.color.bg,
+  type: "button",
+  hover_color: "white",
+  border_radius: "0px",
+  font_size: "14px",
   bold: false,
-  color: theme.color.gray,
+  is_flex: null,
   hover: false,
-  hover_color: theme.color.black,
-  hover_bg: theme.color.white,
-  font_size: "17px",
-  border: "none",
-  align_start: false,
 };
 
-const Wrapper = styled.div`
-  ${(props) => props.bold && `font-weight : 700;`}
-  border: ${(props) => props.border};
+const ButtonEle = styled.button`
+  border: none;
+  font-size: ${(props) => props.font_size};
+  font-weight: ${(props) => props.bold && 700};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
   background-color: ${(props) => props.bg};
-  color: ${(props) => props.color};
-  font-size: ${(props) => props.font_size};
+  border-radius: ${(props) => props.border_radius};
+  transition: background-color 0.3s;
   ${(props) =>
     props.hover &&
     `
@@ -56,7 +53,7 @@ const Wrapper = styled.div`
         }
 
     `}
-  ${(props) => props.cursor && "cursor : pointer"};
+  color: ${(props) => props.color};
   ${(props) => {
     if (props.is_flex !== null) {
       return `
@@ -67,13 +64,6 @@ const Wrapper = styled.div`
             `;
     }
   }}
-  ${(props) =>
-    props.align_start
-      ? `
-     text-align: start;
-    `
-      : ``}
-  transition: background-color 0.3s;
 `;
 
-export default Grid;
+export default Button;
