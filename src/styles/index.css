@@ -158,7 +158,6 @@ ul.pagination li {
   display: inline-block;
   width: 30px;
   height: 30px;
-  border: 1px solid #e2e2e2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -189,7 +188,7 @@ ul.pagination li.active {
 
 ul.pagination li a:hover,
 ul.pagination li a.active {
-  color: blue;
+  color: #9da7ab;
 }
 
 .page-selection {

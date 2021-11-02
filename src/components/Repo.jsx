@@ -2,9 +2,33 @@ import React from "react";
 import Grid from "../elements/Grid";
 import Button from "../elements/Button";
 import theme from "../styles/theme";
+import { NotificationManager } from "react-notifications";
+import { useDispatch, useSelector } from "react-redux";
+import { actionSetIssue } from "../redux/modules/repo";
+import NotificationContainer from "react-notifications/lib/NotificationContainer";
 
 const Repo = (props) => {
-  const { in_repo } = props;
+  const { in_repo, repo_id, repository, description, language, html_url } =
+    props;
+
+  const dispatch = useDispatch();
+  const storedRepo = useSelector((state) => state.repo.localRepo);
+
+  const repoObj = {
+    repository,
+    description,
+    language,
+    html_url,
+    repo_id,
+  };
+
+  const handleClickPlus = () => {
+    if (storedRepo.length >= 4) {
+      NotificationManager.info("4개 이상 등록이 불가합니다.");
+      return;
+    }
+    dispatch(actionSetIssue(repoObj));
+  };
 
   return (
     <Grid
@@ -37,8 +61,10 @@ const Repo = (props) => {
           hover
           hover_color={theme.color.blue}
           hover_bg={theme.color.bg}
+          _onClick={() => window.open(html_url)}
+          align_start
         >
-          parkseulkee/tetris_game
+          {repository}
         </Grid>
         <Grid
           bg={in_repo ? theme.color.bg : theme.color.grayBlack1}
@@ -49,8 +75,9 @@ const Repo = (props) => {
           }}
           margin="10px 0 10px 0"
           font_size="20px"
+          align_start
         >
-          테트리스
+          {description}
         </Grid>
         <Grid
           bg={in_repo ? theme.color.bg : theme.color.grayBlack1}
@@ -61,22 +88,24 @@ const Repo = (props) => {
           }}
           margin="0 0 10px 0"
           font_size="20px"
+          color={theme.color.white}
         >
-          C++
+          {language}
         </Grid>
       </Grid>
       <Grid bg={in_repo ? theme.color.bg : theme.color.grayBlack1}>
         {in_repo && (
           <Button
             width="150px"
-            bg={theme.color.blue}
+            bg={theme.color.green}
             height="50px"
             border_radius="5px"
             font_size="17px"
             hover
-            color={theme.color.grayBlack2}
+            color={theme.color.gray}
             hover_color={theme.color.gray}
             hover_bg={theme.color.grayBlack2}
+            _onClick={handleClickPlus}
             bold
           >
             추가

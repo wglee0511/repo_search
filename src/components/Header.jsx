@@ -17,7 +17,7 @@ const Header = () => {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    history.push(`/search/repository/${inputValue}`);
+    history.push(`/search/repository/${inputValue}/1`);
   };
 
   const handleOnChange = (event) => {
@@ -27,10 +27,11 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <Grid margin="10px 0 10px 0" width={theme.size.mainWidth}>
+      <Grid margin="10px 0 10px " width={theme.size.mainWidth}>
         <Logo url={url} setRepos={setRepos} repos={repos} />
         <form onSubmit={handleOnSubmit}>
           <Input
+            width="800px"
             margin="10px 0 10px"
             value={inputValue}
             _onChange={handleOnChange}
@@ -45,9 +46,10 @@ const Header = () => {
 const Wrapper = styled.nav`
   position: fixed;
   top: 0;
-
   z-index: 2;
-  width: 100%;
+  width: ${theme.size.mainWidth};
+  border: 1px solid ${theme.color.gray};
+  background-color: ${theme.color.bg};
 `;
 
 export default withRouter(Header);

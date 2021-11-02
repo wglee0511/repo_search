@@ -29,7 +29,7 @@ const Logo = (props) => {
         align_item: "center",
       }}
     >
-      <GitHubIcon fontSize="large" />
+      <GitHubIcon style={{ marginLeft: "15px" }} fontSize="large" />
       <Grid
         color={nowUrl ? theme.color.white : theme.color.gray}
         is_flex={{

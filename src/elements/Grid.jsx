@@ -33,6 +33,7 @@ Grid.defaultProps = {
   hover_bg: theme.color.white,
   font_size: "17px",
   border: "none",
+  align_start: false,
 };
 
 const Wrapper = styled.div`
@@ -41,6 +42,7 @@ const Wrapper = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
   background-color: ${(props) => props.bg};
   color: ${(props) => props.color};
   font-size: ${(props) => props.font_size};
@@ -65,6 +67,12 @@ const Wrapper = styled.div`
             `;
     }
   }}
+  ${(props) =>
+    props.align_start
+      ? `
+     text-align: start;
+    `
+      : ``}
   transition: background-color 0.3s;
 `;
 
