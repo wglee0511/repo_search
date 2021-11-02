@@ -32,7 +32,7 @@ const StoredRepo = (props) => {
         ) : (
           <ArrowDropUpIcon style={{ marginLeft: "10px" }} />
         )}
-        {storedRepo.length}
+        {storedRepo?.length ?? "등록된 Repository가 존재하지 않습니다."}
       </Grid>
       {repos &&
         storedRepo.map((each, index) => {

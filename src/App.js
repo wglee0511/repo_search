@@ -9,9 +9,16 @@ import Spinner from "./shared/Spinner";
 import theme from "./styles/theme";
 import "./styles/App.css";
 import Grid from "./elements/Grid";
+import { useEffect } from "react";
+import { actionResetUpRepo } from "./redux/modules/repo";
 
 function App() {
   const isLoading = useSelector((state) => state.isLoading.isLoading);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(actionResetUpRepo());
+  }, []);
 
   return (
     <Grid className="App" width={theme.size.mainWidth} margin="0 auto 0 auto">

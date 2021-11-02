@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { repoAxios } from "../../shared/api";
+import {
+  setLocalStorage,
+  getLocalStorage,
+  deleteLocalStorage,
+} from "../../shared/enterLocalStorage";
 import testLogger from "../../shared/testLogger";
 import { actionIsLoading } from "./isLoading";
 
@@ -18,16 +23,30 @@ const repo = createSlice({
       state.paging.total = totalPage;
       state.totalRepo = totalSetup;
     },
-    actionSetIssue: (state, action) => {
+    actionSetRepo: (state, action) => {
       const repo_id = action.payload.repo_id;
       const checkIndex = state.localRepo.findIndex(
         (each) => each.repo_id === repo_id
       );
-      testLogger(checkIndex);
-      state.localRepo =
-        checkIndex === -1
-          ? [...state.localRepo, action.payload]
-          : [...state.localRepo];
+      if (checkIndex === -1) {
+        state.localRepo = [...state.localRepo, action.payload];
+        setLocalStorage("stored_repo", action.payload);
+      }
+    },
+    actionResetUpRepo: (state) => {
+      const getArr = getLocalStorage("stored_repo");
+      state.localRepo = [...getArr];
+    },
+    actionDeleteRepo: (state, action) => {
+      const repo_id = action.payload.repo_id;
+      const deleteIndex = state.localRepo.findIndex(
+        (each) => each.repo_id === repo_id
+      );
+      console.log(deleteIndex);
+      if (deleteIndex !== -1) {
+        state.localRepo.splice(deleteIndex, 1);
+        deleteLocalStorage("stored_repo", action.payload);
+      }
     },
   },
 });
@@ -72,6 +91,12 @@ export const getIssuesFromGithub =
       testLogger(error);
     }
   };
-export const { actionGetRepo, actionSetIssue } = repo.actions;
+
+export const {
+  actionGetRepo,
+  actionSetRepo,
+  actionResetUpRepo,
+  actionDeleteRepo,
+} = repo.actions;
 
 export default repo;

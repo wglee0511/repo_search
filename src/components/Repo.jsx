@@ -4,7 +4,7 @@ import Button from "../elements/Button";
 import theme from "../styles/theme";
 import { NotificationManager } from "react-notifications";
 import { useDispatch, useSelector } from "react-redux";
-import { actionSetIssue } from "../redux/modules/repo";
+import { actionDeleteRepo, actionSetRepo } from "../redux/modules/repo";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
 
 const Repo = (props) => {
@@ -27,7 +27,15 @@ const Repo = (props) => {
       NotificationManager.info("4개 이상 등록이 불가합니다.");
       return;
     }
-    dispatch(actionSetIssue(repoObj));
+    dispatch(actionSetRepo(repoObj));
+  };
+
+  const handleClickDelete = () => {
+    if (storedRepo.length === 0) {
+      NotificationManager.info("등록된 Repository가 존재하지 않습니다.");
+      return;
+    }
+    dispatch(actionDeleteRepo(repoObj));
   };
 
   return (
@@ -122,6 +130,7 @@ const Repo = (props) => {
             hover_color={theme.color.gray}
             hover_bg={theme.color.grayBlack2}
             bold
+            _onClick={handleClickDelete}
           >
             삭제
           </Button>
