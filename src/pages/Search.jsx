@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Grid from "../elements/Grid";
-import Repo from "./Repo";
+import Repo from "../components/Repo";
 import theme from "../styles/theme";
 import Pagination from "react-js-pagination";
 import { useParams } from "react-router";
@@ -27,11 +27,20 @@ const Search = () => {
 
   useEffect(() => {
     dispatch(getRepoFromGithub(word, page));
-  }, []);
+  }, [word, page]);
 
   return (
-    <Grid margin="200px 0 10px 0 " width={theme.size.mainWidth}>
-      {word !== undefined
+    <Grid margin="230px 0 10px 0 " width={theme.size.mainWidth}>
+      {repoArr.length !== 0 ? (
+        <Grid bold font_size="20px" margin="0 0 30px 0">
+          검색결과 : 총 {totalNum}개
+        </Grid>
+      ) : (
+        <Grid bold font_size="20px" margin="0 0 30px 0">
+          검색어를 입력해주세요
+        </Grid>
+      )}
+      {repoArr.length !== 0
         ? repoArr?.map((each, index) => {
             return (
               <Repo
@@ -47,15 +56,17 @@ const Search = () => {
           })
         : "검색결과가 없습니다."}
 
-      <Pagination
-        activePage={page}
-        itemsCountPerPage={30}
-        totalItemsCount={totalNum}
-        pageRangeDisplayed={10}
-        prevPageText={"‹"}
-        nextPageText={"›"}
-        onChange={handlePageChange}
-      />
+      {repoArr.length !== 0 && (
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={30}
+          totalItemsCount={totalNum}
+          pageRangeDisplayed={10}
+          prevPageText={"‹"}
+          nextPageText={"›"}
+          onChange={handlePageChange}
+        />
+      )}
     </Grid>
   );
 };

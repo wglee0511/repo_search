@@ -15,14 +15,17 @@ const Logo = (props) => {
 
   const moveToHome = () => {
     history.push("/");
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const moveToIssues = () => {
     history.push("/search/issues/1");
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const moveToSearch = () => {
     history.push(`/search/repository/${inputValue}/1`);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   return (

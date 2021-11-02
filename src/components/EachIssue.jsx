@@ -15,14 +15,7 @@ const EachIssue = (props) => {
     window.open(issue_url);
   };
   return (
-    <Grid
-      margin="0 0 0 15px"
-      is_flex={{
-        direction: "column",
-        just_con: "center",
-        align_item: "flex-start",
-      }}
-    >
+    <Grid border={`1px solid ${theme.color.gray}`} padding="0 0 0 15px">
       <Grid
         _onClick={moveToRepo}
         is_flex={{

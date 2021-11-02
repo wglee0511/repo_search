@@ -18,6 +18,7 @@ const Header = () => {
   const handleOnSubmit = (event) => {
     event.preventDefault();
     history.push(`/search/repository/${inputValue}/1`);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const handleOnChange = (event) => {
@@ -28,7 +29,12 @@ const Header = () => {
   return (
     <Wrapper>
       <Grid margin="10px 0 10px " width={theme.size.mainWidth}>
-        <Logo url={url} setRepos={setRepos} repos={repos} />
+        <Logo
+          url={url}
+          setRepos={setRepos}
+          repos={repos}
+          inputValue={inputValue}
+        />
         <form onSubmit={handleOnSubmit}>
           <Input
             width="800px"

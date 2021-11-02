@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router";
 import Header from "./components/Header";
-import Issues from "./components/Issues";
-import Main from "./components/Main";
-import Search from "./components/Search";
+import Issues from "./pages/Issues";
+import Main from "./pages/Main";
+import Search from "./pages/Search";
 import { NotificationContainer } from "react-notifications";
 import Spinner from "./shared/Spinner";
 import theme from "./styles/theme";
@@ -17,6 +17,7 @@ function App() {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    // 새로고침시 로컬스토리지에 저장해둔 레포지토리를 리덕스에 다시 저장하는 코드
     dispatch(actionResetUpRepo());
   }, []);
 

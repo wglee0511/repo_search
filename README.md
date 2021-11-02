@@ -27,3 +27,4 @@
     - 공통 관련
         - console.log() 대신 testLogger 이용할 것
         - style 관련 styles -> theme 참고하여 스타일 설정
+        - 알림기능 react-notifications 패키지 참고할 것
