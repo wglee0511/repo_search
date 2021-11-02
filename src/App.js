@@ -30,7 +30,7 @@ function App() {
           path="/search/repository/:word/:page_num"
           component={Search}
         />
-        <Route exact path="/search/issues" component={Issues} />
+        <Route exact path="/search/issues/:page_num" component={Issues} />
         <Redirect from="*" to="/" />
       </Switch>
       <NotificationContainer />

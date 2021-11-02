@@ -7,7 +7,7 @@ import { useParams } from "react-router";
 import { useDispatch } from "react-redux";
 import { getRepoFromGithub } from "../redux/modules/repo";
 import { useSelector } from "react-redux";
-import testLogger from "../shared/testLogger";
+
 import { v4 as uuidv4 } from "uuid";
 
 const Search = () => {
@@ -20,8 +20,6 @@ const Search = () => {
   const [page, setPage] = useState(pageNum);
 
   const handlePageChange = (page) => {
-    testLogger(page);
-
     setPage(page);
     dispatch(getRepoFromGithub(word, page));
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -29,23 +27,25 @@ const Search = () => {
 
   useEffect(() => {
     dispatch(getRepoFromGithub(word, page));
-  }, [word]);
+  }, []);
 
   return (
     <Grid margin="200px 0 10px 0 " width={theme.size.mainWidth}>
-      {repoArr?.map((each, index) => {
-        return (
-          <Repo
-            in_repo
-            key={index}
-            repo_id={uuidv4()}
-            repository={each.repository}
-            description={each.description}
-            language={each.language}
-            html_url={each.html_url}
-          />
-        );
-      }) ?? "검색결과가 없습니다."}
+      {word !== undefined
+        ? repoArr?.map((each, index) => {
+            return (
+              <Repo
+                in_repo
+                key={index}
+                repo_id={uuidv4()}
+                repository={each.repository}
+                description={each.description}
+                language={each.language}
+                html_url={each.html_url}
+              />
+            );
+          })
+        : "검색결과가 없습니다."}
 
       <Pagination
         activePage={page}

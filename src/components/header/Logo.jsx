@@ -5,7 +5,7 @@ import theme from "../../styles/theme";
 import { history } from "../../redux/configureStore";
 
 const Logo = (props) => {
-  const { url, setRepos, repos } = props;
+  const { url, setRepos, repos, inputValue } = props;
   // true 일때 home, search || false 일 때  issues
   const nowUrl = url.indexOf("issues") == -1 ? true : false;
 
@@ -18,7 +18,11 @@ const Logo = (props) => {
   };
 
   const moveToIssues = () => {
-    history.push("/search/issues");
+    history.push("/search/issues/1");
+  };
+
+  const moveToSearch = () => {
+    history.push(`/search/repository/${inputValue}/1`);
   };
 
   return (
@@ -61,6 +65,22 @@ const Logo = (props) => {
         cursor
       >
         Stored Repos
+      </Grid>
+      <Grid
+        _onClick={moveToSearch}
+        color={nowUrl ? theme.color.white : theme.color.gray}
+        is_flex={{
+          just_con: "center",
+          align_item: "center",
+        }}
+        width="150px"
+        hover
+        hover_color={theme.color.white}
+        hover_bg={theme.color.bg}
+        bold
+        cursor
+      >
+        Search
       </Grid>
       <Grid
         _onClick={moveToIssues}
