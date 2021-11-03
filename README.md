@@ -10,6 +10,17 @@
     - Styled-components
     - Material-UI
 
+## 사용방법
+
+    - 터미널 npm start 기입하여 프론트 로컬서버를 작동
+    - 검색창에 repository를 검색
+    - repository이름을 클릭하면 해당 repository로 이동(새창)
+    - 추가하고 싶은 repository를 추가버튼을 클릭하여 추가 (4개까지 추가가능하며 표시 및 알람 작동)
+    - 최상단 Stored Repo를 클릭하거나 검색창 아래 화살표 버튼을 클릭하여 저장되어 있는 repository를 확인
+    - 저장된 repository를 삭제버튼을 통해 삭제
+    - 최상단 Issues를 클릭하여 추가된 repository의 issue들을 확인
+    - repository이름을 클릭하여 해당 repository로 이동하거나 description을 클릭하여 해당 issue의 상세페이지로 이동
+
 ## 주의사항
 
     - 컴포넌트 관련
